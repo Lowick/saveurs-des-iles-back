@@ -14,6 +14,8 @@ import { Avis } from './avis/entities/avi.entity';
 import { Reservation } from './reservation/entities/reservation.entity';
 import { Plat } from './plat/entities/plat.entity';
 import { Categorie } from './categorie/entities/categorie.entity';
+import { AuthModule } from './auth/auth.module';
+import { Image } from './image/entities/image.entity';
 
 @Module({
   imports: [
@@ -41,7 +43,7 @@ import { Categorie } from './categorie/entities/categorie.entity';
       logging: true,
       // Permet d'afficher les requetes SQL de TypeOrm dans la console
     }),
-    UtilisateurModule, ReservationModule, AvisModule, CategorieModule, ImageModule, PlatModule],
+    UtilisateurModule, ReservationModule, AvisModule, CategorieModule, ImageModule, PlatModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

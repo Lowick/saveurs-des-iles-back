@@ -3,4 +3,5 @@ export class CreateAuthDto {
     email:string;
     password:string;
     admin: boolean;
+    
 }

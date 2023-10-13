@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Reservation } from "src/reservation/entities/reservation.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Utilisateur {
@@ -17,9 +18,14 @@ export class Utilisateur {
 
   @Column()
   admin: boolean;
-  
+
+
+   @OneToMany(() => Reservation, (reservation )=> reservation.utilisateur)
+  reservation: Reservation;
 
 
   
 
 }
+
+

@@ -1,18 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
 import { AvisService } from './avis.service';
 import { CreateAviDto } from './dto/create-avi.dto';
 import { UpdateAviDto } from './dto/update-avi.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('avis')
 export class AvisController {
   constructor(private readonly avisService: AvisService) {}
 
   @Post()
-  create(@Body() createAviDto: CreateAviDto) {
-    return this.avisService.create(createAviDto);
+  @UseGuards(AuthGuard('jwt'))
+  async create(
+    @Request() req,
+    @Body() createAviDto: CreateAviDto) {
+      console.log("create");
+      const createdAvis = await this.avisService.createdAvis(createAviDto)
+    return createdAvis
   }
 
   @Get()
+  @UseGuards(AuthGuard('jwt'))
   findAll() {
     return this.avisService.findAll();
   }

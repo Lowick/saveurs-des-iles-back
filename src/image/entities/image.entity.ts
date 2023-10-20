@@ -1,9 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Plat } from "src/plat/entities/plat.entity";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Image {
    @PrimaryGeneratedColumn()
-  id_photo: number;
+  id: number;
 
   @Column({ type: 'varchar', length: 255 })
   nom: string;
@@ -16,4 +17,6 @@ export class Image {
 
   @Column()
   description: string;
+
+  
 }

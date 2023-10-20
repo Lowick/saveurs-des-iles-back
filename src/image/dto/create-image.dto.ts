@@ -1,5 +1,5 @@
 export class CreateImageDto {
-name: string;
+nom: string;
 mimetype: string;
 description: string;
 size: number;

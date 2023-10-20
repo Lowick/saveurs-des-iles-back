@@ -6,7 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Plat } from './entities/plat.entity';
 import { Categorie } from 'src/categorie/entities/categorie.entity';
 import { Repository } from 'typeorm';
-import { Utilisateur } from 'src/utilisateur/entities/utilisateur.entity';
+
 
 @Injectable()
 
@@ -19,13 +19,21 @@ export class PlatService {
   ){}
 
   async create(createPlatDto: CreatePlatDto) {
-    const newPlat = this.platRepository.create(createPlatDto);
-    const result = await this.platRepository.save(newPlat);
+    console.log(createPlatDto);
+    const plat = this.platRepository.create({
+      nom:createPlatDto.nom,
+      categorie:createPlatDto.categorie,
+      image:createPlatDto.image
+    });
+    console.log(plat);
+    const result = await this.platRepository.save(plat);
+    
+    
     return result;
   }
 
-  findAll() {
-    return `This action returns all plat`;
+  async findAll() {
+    return await this.platRepository.find();
   }
 
   findOne(id: number) {

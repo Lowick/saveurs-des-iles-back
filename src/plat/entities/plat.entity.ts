@@ -1,6 +1,6 @@
 import { Categorie } from "src/categorie/entities/categorie.entity";
 import { Image } from "src/image/entities/image.entity";
-import { Column, Entity, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Plat {
@@ -10,10 +10,18 @@ export class Plat {
   @Column({ length: 255 })
   nom: string;
 
-  @JoinColumn({ name: 'idcategorie' })
-  categorie:Categorie;
+  @Column()
+  idphoto:number;
 
+  // @ManyToOne(()=>Categorie, (categorie) => categorie.plat)
+  // categorie:Categorie;
+  @ManyToOne(()=>Categorie, {eager: true, cascade:true})
+  @JoinColumn({name: 'idcategorie'})
+  categorie:Categorie;
+  
+@OneToOne(()=>Image, {eager: true})
   @JoinColumn({ name: 'idimage' })
   image:Image;
+
 }
 

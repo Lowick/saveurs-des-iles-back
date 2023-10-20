@@ -17,8 +17,10 @@ export class PlatController {
     if(!utilisateur.admin){
       throw new UnauthorizedException('Droits admin nécéssaires');
     }
+    // console.log('controlleur '+JSON.stringify(createPlatDto))
     return this.platService.create(createPlatDto);
   }
+  
 
   @Get()
   findAll() {

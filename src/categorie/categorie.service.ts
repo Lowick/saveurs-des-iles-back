@@ -14,30 +14,40 @@ export class CategorieService {
     return 'This action adds a new categorie';
   }
 
-  findAll() {
-    return `This action returns all categorie`;
+  async findAll() {
+    const allCategories = await this.categorieRepository.find()
+    return {
+      status: 'success',
+      message:'Le retour de toutes les categories se trouve dans la data',
+      data: allCategories,
+    };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} categorie`;
+  async findOne(id: number) {
+
+    const found = await this.categorieRepository.findOneBy({id});
+    if (!found) {
+      throw new NotFoundException(`Categorie with the id ${id} not found`);
+    }
+    return found;
   }
 
   update(id: number, updateCategorieDto: UpdateCategorieDto) {
     return `This action updates a #${id} categorie`;
   }
 
- async remove(id: number) {
-  try {
-    const categorie = await this.findOne(id);
-    if (!categorie) {
-      throw new NotFoundException('Catégorie non trouvée');
-    }
-    const response = await this.categorieRepository.remove(categorie);
-    return response;
-  } catch (error) {
-    // Gérez les erreurs ici
-    throw new InternalServerErrorException('La suppression a échoué : ' + error.message);
-  }
-}
+//  async remove(id: number) {
+//   try {
+//     const categorie = await this.findOne(id);
+//     if (!categorie) {
+//       throw new NotFoundException('Catégorie non trouvée');
+//     }
+//     const response = await this.categorieRepository.remove(id.categorie);
+//     return response;
+//   } catch (error) {
+//     // Gérez les erreurs ici
+//     throw new InternalServerErrorException('La suppression a échoué : ' + error.message);
+//   }
+// }
 }
 

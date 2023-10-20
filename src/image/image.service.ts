@@ -23,7 +23,7 @@ export class ImageService {
   create(img: Express.Multer.File) {
     console.log('notre img' + img.originalname);
     return this.imageRepository.save({
-      name: img.filename,
+      nom: img.filename,
       mimetype: img.mimetype,
       size: img.size,
       description: img.originalname,
@@ -52,10 +52,10 @@ export class ImageService {
     return new StreamableFile(imageFile);
   }
 
-  async getImageById(id_photo: number, res): Promise<StreamableFile> {
-    const result = await this.imageRepository.findOneBy({ id_photo });
+  async getImageById(id: number, res): Promise<StreamableFile> {
+    const result = await this.imageRepository.findOneBy({ id});
     if (!result) {
-      throw new NotFoundException(`The photo ${id_photo} is not found !`);
+      throw new NotFoundException(`The photo ${id} is not found !`);
     }
     const imageFile = createReadStream(
       join(process.cwd(), 'uploads', result.nom),

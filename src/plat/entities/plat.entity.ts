@@ -11,7 +11,10 @@ export class Plat {
   nom: string;
 
   @Column()
-  idphoto:number;
+  idcategorie:number;
+
+  @Column()
+  idimage:number;
 
   // @ManyToOne(()=>Categorie, (categorie) => categorie.plat)
   // categorie:Categorie;

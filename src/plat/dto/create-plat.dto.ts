@@ -5,11 +5,12 @@ import { Image } from "src/image/entities/image.entity";
 
 export class CreatePlatDto {
     @IsString()
+
     nom:string;
 
     
-    categorie:Categorie;
+    idcategorie:number;
 
    
-    image:Image;
+    idimage:number;
 }

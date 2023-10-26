@@ -18,5 +18,8 @@ export class Image {
   @Column()
   description: string;
 
+   @OneToOne(() => Plat, (plat)=>plat.image)
+  plats: Plat[];
+
   
 }

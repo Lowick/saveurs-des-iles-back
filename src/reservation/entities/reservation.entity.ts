@@ -17,16 +17,18 @@ export class Reservation {
   service: string;
 
   @Column()
-  nombreDePersonne: number;
+  nombre_de_personne: number;
 
   @Column()
   telephone: number;
 
   @Column()
-  date: Date;
+  message:string;
 
   @Column()
-  heure: Date;
+  idutilisateur: number;
+
+
 
  @ManyToOne(() => Utilisateur, (utilisateur) => utilisateur.reservation)
  @JoinColumn({ name: 'idutilisateur'})

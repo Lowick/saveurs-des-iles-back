@@ -1,19 +1,43 @@
 import { Injectable } from '@nestjs/common';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Reservation } from './entities/reservation.entity';
+import { Utilisateur } from 'src/utilisateur/entities/utilisateur.entity';
+import { Repository } from 'typeorm';
+import { CreateUtilisateurDto } from 'src/utilisateur/dto/create-utilisateur.dto';
 
 @Injectable()
 export class ReservationService {
-  create(createReservationDto: CreateReservationDto) {
-    return 'This action adds a new reservation';
+  constructor(
+    @InjectRepository(Reservation) private reservationRepository: Repository<Reservation>,
+    @InjectRepository(Utilisateur) private utilisateurRepository: Repository<Utilisateur>,
+  ){}
+
+  async create(createReservationDto: CreateReservationDto) {
+    console.log(createReservationDto);
+    const reservation = this.reservationRepository.create({
+      nom:createReservationDto.nom,
+      prenom:createReservationDto.prenom,
+      service:createReservationDto.service,
+      nombre_de_personne:createReservationDto.nombre_de_personne,
+      telephone:createReservationDto.telephone,
+      message:createReservationDto.message,
+      idutilisateur:createReservationDto.idutilisateur,
+    });
+    console.log(reservation);
+    const result = await this.reservationRepository.save(reservation);
+    return result;
   }
 
-  findAll() {
-    return `This action returns all reservation`;
+
+
+ async findAll() {
+    return await this.reservationRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} reservation`;
+ async findOne(id: number) {
+    return await this.reservationRepository.findOneBy({id});
   }
 
   update(id: number, updateReservationDto: UpdateReservationDto) {

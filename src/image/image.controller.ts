@@ -27,16 +27,17 @@ export class ImageController {
   //   return this.imageService.findAll();
   // }
 
-  @Get()
-  async getPhotos(@Res({ passthrough: true }) res): Promise<StreamableFile> {
-    return this.imageService.getImage(res);
-  }
+  // @Get()
+  // async getPhotos(@Res({ passthrough: true }) res): Promise<StreamableFile> {
+  //   return this.imageService.getImage(res);
+  // }
 
   @Get(':id')
   getImageById(
     @Param('id') id: string,
     @Res({ passthrough: true }) res,
   ): Promise<StreamableFile> {
+    console.log(id);
     return this.imageService.getImageById(+id, res);
   }
 

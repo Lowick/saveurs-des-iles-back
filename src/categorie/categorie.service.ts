@@ -16,11 +16,7 @@ export class CategorieService {
 
   async findAll() {
     const allCategories = await this.categorieRepository.find()
-    return {
-      status: 'success',
-      message:'Le retour de toutes les categories se trouve dans la data',
-      data: allCategories,
-    };
+    return allCategories
   }
 
   async findOne(id: number) {

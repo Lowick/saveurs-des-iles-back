@@ -22,8 +22,8 @@ export class PlatService {
     console.log(createPlatDto);
     const plat = this.platRepository.create({
       nom:createPlatDto.nom,
-      categorie:createPlatDto.categorie,
-      image:createPlatDto.image
+      idcategorie:createPlatDto.idcategorie,
+      idimage:createPlatDto.idimage,
     });
     console.log(plat);
     const result = await this.platRepository.save(plat);
@@ -36,8 +36,8 @@ export class PlatService {
     return await this.platRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} plat`;
+  async findOne(id: number) {
+    return await this.platRepository.findOneBy({id});
   }
 
   update(id: number, updatePlatDto: UpdatePlatDto) {

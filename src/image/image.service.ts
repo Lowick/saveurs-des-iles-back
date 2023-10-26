@@ -34,23 +34,23 @@ export class ImageService {
   //   return await this.photoRepository.find();
   // }
 
-  async getImage(res): Promise<StreamableFile> {
-    const result = await this.imageRepository.find();
-    console.log(result);
-    let imageFile;
-    const imageTab = [];
-    // const lastResult = result[result.length - 1];
-    // console.log(lastResult);
-    for (let i = 0; i < result.length; i++) {
-      imageFile = createReadStream(
-        join(process.cwd(), 'uploads', result[i].nom),
-      );
-      res.set('Content-Type', result[i].mimetype);
-      imageTab.push(imageFile);
-    }
-    console.log(imageTab[imageFile]);
-    return new StreamableFile(imageFile);
-  }
+  // async getImage(res): Promise<StreamableFile> {
+  //   const result = await this.imageRepository.find();
+  //   console.log(result);
+  //   let imageFile;
+  //   const imageTab = [];
+  //   // const lastResult = result[result.length - 1];
+  //   // console.log(lastResult);
+  //   for (let i = 0; i < result.length; i++) {
+  //     imageFile = createReadStream(
+  //       join(process.cwd(), 'uploads', result[i].nom),
+  //     );
+  //     res.set('Content-Type', result[i].mimetype);
+  //     imageTab.push(imageFile);
+  //   }
+  //   console.log(imageTab[imageFile]);
+  //   return new StreamableFile(imageFile);
+  // }
 
   async getImageById(id: number, res): Promise<StreamableFile> {
     const result = await this.imageRepository.findOneBy({ id});

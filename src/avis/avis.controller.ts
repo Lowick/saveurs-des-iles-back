@@ -19,7 +19,6 @@ export class AvisController {
   }
 
   @Get()
-  @UseGuards(AuthGuard('jwt'))
   findAll() {
     return this.avisService.findAll();
   }

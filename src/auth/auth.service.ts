@@ -50,7 +50,7 @@ export class AuthService {
     if(utilisateur && (await bcrypt.compare(password, utilisateur.password))){
       const payload = {email};
       const accessToken = await this.jwtService.sign(payload);
-      return {accessToken};
+      return {accessToken, utilisateur};
     }else{
       throw new UnauthorizedException(
         'Ces identifiants ne sont pas bons'

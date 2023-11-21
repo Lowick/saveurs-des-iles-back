@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePlatDto } from './dto/create-plat.dto';
 import { UpdatePlatDto } from './dto/update-plat.dto';
 import { Image } from 'src/image/entities/image.entity';
@@ -44,7 +44,13 @@ export class PlatService {
     return `This action updates a #${id} plat`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} plat`;
+  async remove(id: number) {
+    const found = await this.findOne(id);
+
+    if(found){
+      await this.platRepository.remove(found);
+    return found;
+    }
+    throw new NotFoundException(`le plat n'existe pas`);
   }
 }

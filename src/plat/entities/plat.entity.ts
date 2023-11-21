@@ -22,7 +22,7 @@ export class Plat {
   @JoinColumn({name: 'idcategorie'})
   categorie:Categorie;
   
-@OneToOne(()=>Image, {eager: true})
+@OneToOne(()=>Image, {eager: true, cascade:true})
   @JoinColumn({ name: 'idimage' })
   image:Image;
 

@@ -44,7 +44,10 @@ export class ReservationService {
     return `This action updates a #${id} reservation`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} reservation`;
+ async remove(id: number) {
+
+    const reservation = await this.findOne(id);
+    const response = await this.reservationRepository.remove(reservation)
+    return response;
   }
 }
